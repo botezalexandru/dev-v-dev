@@ -1,0 +1,56 @@
+.user-stats {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 1em;
+    width: 75%;
+    margin: 5em auto 0 auto;
+    padding: 1em;
+    text-align: center;
+}
+
+.user-stats.is-loading img,
+.user-stats.is-loading .name,
+.user-stats.is-loading .score,
+.user-stats.is-loading ul {
+    display: none;
+}
+
+.user-stats.is-loading .loading {
+    display: block;
+}
+
+
+.user-stats img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.user-stats ul {
+    width: 80%;
+    margin: 1em auto 0 auto;
+    list-style: none;
+    text-align: left;
+    font-size: .75em;
+}
+
+.user-stats ul li {
+    margin: .5em 0;
+}
+.user-stats ul li.win:before {
+    content: '✅';
+    position: relative;
+    bottom: .2em;
+    margin-right: 1em;
+}
+
+.user-stats ul li.lose:before {
+    content: '❌';
+    position: relative;
+    bottom: .2em;
+    margin-right: 1em;
+}
+
+.user-stats .loading {
+    display: none;
+}

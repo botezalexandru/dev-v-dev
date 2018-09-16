@@ -1,0 +1,122 @@
+.form-input {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.form-input input {
+    font-size: 1em;
+    vertical-align: top;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 0.5em 1em 0.5em 2em;
+    border-width: 2px 0 2px 0;
+    border-style: solid;
+}
+
+.form-input::before,
+.form-input::after {
+    content: '';
+    height: 4em;
+    width: 2em;
+    position: absolute;
+    display: inline-block;
+    background-color: #fff;
+}
+
+.form-input::before {
+    border-style: solid;
+    border-width: 0 2px 0 0;
+    left: -1em;
+}
+
+.form-input::after {
+    top: -0.75em;
+    right: -1em;
+    border-style: solid;
+    border-width: 0 0 0 2px;
+}
+
+.form-input.red input,
+.form-input.red::before,
+.form-input.red::after {
+    border-color: #e53935;
+}
+
+.form-input.blue input,
+.form-input.blue::before,
+.form-input.blue::after {
+    border-color: #1e88e5;
+}
+
+.form-input.to-right::before,
+form button.to-right::before {
+    top: -1.25em;
+    transform: rotate(30deg);
+}
+
+.form-input.to-right::after,
+form button.to-right::after {
+    transform: rotate(30deg);
+}
+
+.form-input.to-left::before,
+.form-input.to-left::after,
+form button.to-left::before,
+form button.to-left::after {
+    transform: rotate(-30deg);
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+button {
+    outline: 0;
+}
+
+form button {
+    color: #fff;
+    font-size: 1em;
+    vertical-align: top;
+    padding: 0.5em 2.5em 0.5em 2.5em;
+    position: relative;
+    left: -10px;
+    position: relative;
+    cursor: pointer;
+}
+
+form button:hover {
+    box-shadow: 0 0 5px #a8a8a8;
+}
+
+
+form button.red {
+    background-color: #e53935;
+    border: 2px solid #e53935;
+}
+
+form button.blue {
+    background-color: #1e88e5;
+    border: 2px solid #1e88e5;
+}
+
+form button::before,
+form button::after {
+    content: '';
+    height: 4em;
+    width: 2em;
+    position: absolute;
+    display: inline-block;
+    background-color: #fff;
+    top: -.5em;
+}
+
+form button::before {
+    left: -1em;
+    border-color: transparent transparent transparent #fff;
+}
+
+form button::after {
+    top: -.75em;
+    right: -1em;
+    border-color: transparent transparent #fff transparent;
+}

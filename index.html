@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="src/icons/icon-192x192.png" rel="icon" sizes="192x192" />
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple: START -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="apple-touch-icon" sizes="72x72" href="src/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="src/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="src/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="src/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="src/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="src/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="src/icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="src/icons/icon-512x512.png">
+    
+    <link rel="apple-touch-startup-image" href="/launch.png">
+    <link rel="apple-touch-startup-image" href="src/icons/apple-splash-640x1136.png" media="(orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="src/icons/apple-splash-1136x640.png" media="(orientation: landscape)">
+    <!-- Apple: END -->
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="./src/styles/style.css" rel="stylesheet" />
+
+    <title>DEV v DEV</title>
+</head>
+
+<body>
+    <header>
+        <h1> DEV v DEV </h1>
+    </header>
+    <main>
+        <section class="controls">
+            <form data-dev="dev1">
+                <div class="form-input to-right red">
+                    <input name="username" type="text" placeholder="Dev #1" required />
+                </div>
+                <button class="to-right red" type="submit">Go!</button>
+            </form>
+            <form data-dev="dev2">
+                <div class="form-input to-left blue">
+                    <input name="username" type="text" placeholder="Dev #2" required />
+                </div>
+                <button class="to-left blue" type="submit">Go!</button>
+            </form>
+        </section>
+
+        <section id="results">
+            <div class="results__dev1"></div>
+            <div class="results__dev2"></div>
+        </section>
+    </main>
+    <script type="module" src="./src/app.js"></script>
+
+</body>
+
+</html>

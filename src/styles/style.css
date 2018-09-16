@@ -1,0 +1,92 @@
+@import "forms.css";
+@import "user-stats.css";
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+}
+
+
+header {
+    text-align: center;
+    padding-top: 1em;
+    font-size: 1.5em;
+    border-bottom: 5px solid #f7df1e;
+    height: 100px;
+    box-sizing: border-box;
+
+}
+
+h1 {
+    margin: 0;
+}
+/* 
+main {
+    min-height: calc(100% - 14em);
+} */
+
+.controls {
+    display: flex;
+    margin-top: 5em;
+}
+
+.controls form {
+    flex: 1;
+    text-align: center;
+}
+
+#results {
+    margin-top: 5em;
+    display: flex;
+}
+
+#results .results__dev1,
+#results .results__dev2 {
+    flex: 1;
+    max-width: 40%;
+    margin: 0 5em;
+}
+
+#results .results__dev1 .user-stats {
+    border-color: #e53935;
+}
+
+#results .results__dev2 .user-stats {
+    border-color: #1e88e5;
+}
+
+#results .final-result {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.final-result button {
+    background-color: #000;
+    color: #fff;
+    border: 0;
+    font-weight: bold;
+    padding: .25em 1em;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.final-result button:hover {
+    box-shadow: 0 0 5px grey;
+}
+
+.hidden {
+    display: none;
+}
+
+.dots:before {
+    content: '...';
+    margin: 2em 0;
+    display: block;
+}
