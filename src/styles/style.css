@@ -26,10 +26,11 @@ header {
 h1 {
     margin: 0;
 }
-/* 
+
+
 main {
-    min-height: calc(100% - 14em);
-} */
+    padding: 1em;
+}
 
 .controls {
     display: flex;
@@ -89,4 +90,40 @@ main {
     content: '...';
     margin: 2em 0;
     display: block;
+}
+
+@media screen and (max-width: 750px) {
+    .controls {
+        display: block;
+    }
+
+    .controls form {
+        margin: 2em 0;
+    }
+
+    .controls form:first-child {
+        text-align: left;
+    }
+
+    .controls form:nth-child(2) {
+        text-align: right;
+    }
+
+    #results {
+        display: block;
+    }
+
+    #results .results__dev1,
+    #results .results__dev2 {
+        flex: 1;
+        max-width: 100%;
+        margin: 0 5em;
+    }
+
+    #results .final-result {
+        position: static;
+        transform: none;
+        text-align: center;
+        margin-top: 3em;
+    }
 }
