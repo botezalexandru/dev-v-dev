@@ -33,7 +33,7 @@ if ('serviceWorker' in navigator) {
 
 function setupPWA() {
     navigator.serviceWorker.register("service-worker.js").then(swRegistration => {
-        console.log("Service worker succesfully installed!");
+        console.log("Service worker succesfully registered!");
     }, err => {
         console.error(`SW installation failed: ${err}`);
     });

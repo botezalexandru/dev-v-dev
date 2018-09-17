@@ -1,4 +1,4 @@
-const VERSION = 1;
+const VERSION = 6;
 const CACHE_NAME = `dev-v-dev-cache-${VERSION}`;
 const RESOURCES_MANIFEST = 'resources-manifest.json';
 
