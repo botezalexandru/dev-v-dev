@@ -28,13 +28,13 @@ self.addEventListener('activate', function onActivate(event) {
     );
 });
 
-// self.addEventListener('fetch', event => {
-//     const duplicatedRequest = event.request.clone();
+self.addEventListener('fetch', event => {
+    // const duplicatedRequest = event.request.clone();
 
-//     event.respondWith(caches.match(event.request).then(resp => {
-//         return resp || fetch(duplicatedRequest);
-//     }));
-// });
+    // event.respondWith(caches.match(event.request).then(resp => {
+    //     return resp || fetch(duplicatedRequest);
+    // }));
+});
 
 function displayNotification(payload, tag = 'common-tag') {
     const title = 'Dev v Dev';
