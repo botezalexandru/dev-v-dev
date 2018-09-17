@@ -15,10 +15,9 @@ body {
 
 header {
     text-align: center;
-    padding-top: 1em;
-    font-size: 1.5em;
+    padding: 1em 0;
+    font-size: calc(12px + 1vw);
     border-bottom: 5px solid #f7df1e;
-    height: 100px;
     box-sizing: border-box;
 
 }
@@ -29,7 +28,7 @@ h1 {
 
 
 main {
-    padding: 1em;
+    padding: 1em 1em 2em 1em;
 }
 
 .controls {
@@ -42,6 +41,10 @@ main {
     text-align: center;
 }
 
+/* .controls form input,
+.controls form button {
+    margin: .4em 0;
+} */
 #results {
     margin-top: 5em;
     display: flex;
@@ -92,7 +95,7 @@ main {
     display: block;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
     .controls {
         display: block;
     }
@@ -117,7 +120,7 @@ main {
     #results .results__dev2 {
         flex: 1;
         max-width: 100%;
-        margin: 0 5em;
+        margin: 0;
     }
 
     #results .final-result {
@@ -125,5 +128,12 @@ main {
         transform: none;
         text-align: center;
         margin-top: 3em;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .controls form .form-input,
+    .controls form button {
+        margin-bottom: .75em;
     }
 }

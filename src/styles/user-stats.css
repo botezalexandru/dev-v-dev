@@ -32,6 +32,7 @@
     list-style: none;
     text-align: left;
     font-size: .75em;
+    padding: 0;
 }
 
 .user-stats ul li {

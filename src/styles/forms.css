@@ -102,8 +102,8 @@ form button.blue {
 form button::before,
 form button::after {
     content: '';
-    height: 4em;
-    width: 2em;
+    height: 3em;
+    width: 1.5em;
     position: absolute;
     display: inline-block;
     background-color: #fff;
@@ -116,7 +116,17 @@ form button::before {
 }
 
 form button::after {
-    top: -.75em;
+    top: -.9em;
     right: -1em;
     border-color: transparent transparent #fff transparent;
+}
+
+form button.to-right::before,
+form button.to-left::after {
+    top: -.7em;
+}
+
+form button.to-right::after,
+form button.to-left::before {
+    top: 0;
 }
