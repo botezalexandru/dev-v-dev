@@ -1,4 +1,4 @@
-const VERSION = 2;
+const VERSION = 1;
 const CACHE_NAME = `dev-v-dev-cache-${VERSION}`;
 const RESOURCES_MANIFEST = 'resources-manifest.json';
 
@@ -29,11 +29,13 @@ self.addEventListener('activate', function onActivate(event) {
 });
 
 self.addEventListener('fetch', event => {
-    // const duplicatedRequest = event.request.clone();
+    if (event.request.url.indexOf(location.origin) === 0) {
+        const duplicatedRequest = event.request.clone();
 
-    // event.respondWith(caches.match(event.request).then(resp => {
-    //     return resp || fetch(duplicatedRequest);
-    // }));
+        event.respondWith(caches.match(event.request).then(resp => {
+            return resp || fetch(duplicatedRequest);
+        }));
+    }
 });
 
 function displayNotification(payload, tag = 'common-tag') {

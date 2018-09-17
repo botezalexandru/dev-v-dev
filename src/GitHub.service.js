@@ -1,4 +1,4 @@
-class DevService {
+class GitHubService {
     getInfo(username) {
         return fetch(`https://api.github.com/users/${username}`)
             .then(resp => {
@@ -19,4 +19,4 @@ class DevService {
     }
 }
 
-export default new DevService();
+export default new GitHubService();

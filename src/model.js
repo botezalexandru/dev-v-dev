@@ -1,4 +1,5 @@
-import GithubService from "./services/GitHub.service.js";
+import localforage from 'localforage';
+import GitHubService from './GitHub.service';
 
 const Model = (function modelIIFE() {
     let data = {
@@ -7,25 +8,26 @@ const Model = (function modelIIFE() {
         result: undefined,
         past: []
     };
-
     let subscribersList = [];
 
+    localforage.getItem('results').then(results => {
+        data.past = JSON.parse(results) || [];
+        notifySubscribers();
+    });
 
-
-    return {
+    let publicAPI = {
         setDev: (property, username) => {
             resetScore();
 
             data[property] = undefined;
             notifySubscribers();
 
-            GithubService.getInfo(username).then(userInfo => {
+            GitHubService.getInfo(username).then(userInfo => {
                 data[property] = userInfo;
                 if (userInfo) {
                     data[property].score = undefined;
                     data[property].won = [];
-                };
-                checkIfBothSet();
+                }
                 notifySubscribers();
             });
         },
@@ -34,52 +36,57 @@ const Model = (function modelIIFE() {
             data.dev1.score = 0;
             data.dev2.score = 0;
 
-            Object.keys(data.dev1.stats).forEach(key => {
-                if (data.dev1.stats[key] > data.dev2.stats[key]) {
-                    hasWonStat(data.dev1, key);
-                } else if (data.dev1.stats[key] < data.dev2.stats[key]) {
-                    hasWonStat(data.dev2, key);
-                } else {
-                    hasWonStat(data.dev1, key);
-                    hasWonStat(data.dev2, key);
-                }
-            })
+            compareStats(data.dev1, data.dev2);
+
+            data.result = 'draw';
             if (data.dev1.score > data.dev2.score) {
-                data.result = "dev1";
+                data.result = 'dev1';
             } else if (data.dev1.score < data.dev2.score) {
-                data.result = "dev2";
-            } else {
-                data.result = "draw";
+                data.result = 'dev2';
             }
+
+            data.past.unshift({
+                dev1: data.dev1.username,
+                dev2: data.dev2.username,
+                result: data.result
+            });
+            localforage.setItem('results', JSON.stringify(data.past));
+
             notifySubscribers();
         },
 
-        subscribe(notifyFunction, property) {
-            subscribersList.push({
-                property,
-                notify: notifyFunction
-            });
-            if (property) {
-                notifyFunction(data[property]);
-            } else {
-                notifyFunction(data);
-            }
+        subscribe(renderFunction, propertyToWatch) {
+            let newSubscriber = {
+                propertyToWatch,
+                render: renderFunction
+            };
+            subscribersList.push(newSubscriber);
 
+            if (propertyToWatch) {
+                newSubscriber.render(data[propertyToWatch]);
+            } else {
+                newSubscriber.render(data);
+            }
         }
     };
 
-    function checkIfBothSet() {
-        const {
-            dev1,
-            dev2
-        } = data;
+    return publicAPI;
 
-        if (data.dev1 && data.dev2) {
-            data.past.push({
-                dev1,
-                dev2
-            })
-        }
+    /** PRIVATE FUNCTIONS */
+    function compareStats(dev1, dev2) {
+        Object.keys(dev1.stats).forEach(key => {
+            if (dev1.stats[key] > dev2.stats[key]) {
+                hasWonStat(dev1, key);
+                return;
+            }
+            if (dev1.stats[key] < dev2.stats[key]) {
+                hasWonStat(dev2, key);
+                return;
+            }
+            // Draw: both win
+            hasWonStat(dev1, key);
+            hasWonStat(dev2, key);
+        });
     }
 
     function hasWonStat(dev, key) {
@@ -89,10 +96,10 @@ const Model = (function modelIIFE() {
 
     function notifySubscribers() {
         subscribersList.forEach(subscriber => {
-            if (!subscriber.property) {
-                subscriber.notify(data);
+            if (!subscriber.propertyToWatch) {
+                subscriber.render(data);
             } else {
-                subscriber.notify(data[subscriber.property]);
+                subscriber.render(data[subscriber.propertyToWatch]);
             }
         });
     }
@@ -108,6 +115,6 @@ const Model = (function modelIIFE() {
         }
         data.result = undefined;
     }
-}());
+})();
 
 export default Model;

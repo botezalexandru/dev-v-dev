@@ -1,6 +1,7 @@
 [
     "/",
-    "src/app.js",
-    "src/model.js",
-    "src/styles/style.css"
+    "src/bundle.js",
+    "src/styles/style.css",
+    "src/styles/forms.css",
+    "src/styles/user-stats.css"
 ]

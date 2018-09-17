@@ -28,10 +28,7 @@ function UserStatsUI(property, model) {
     let scoreEl = container.querySelector(".score");
     let resultsEl = container.querySelector("ul");
 
-
-
     container.render = (devInfo) => {
-        console.log(devInfo);
         if (devInfo === undefined) {
             container.classList.add("is-loading");
             imgEl.src = null;
@@ -58,7 +55,6 @@ function UserStatsUI(property, model) {
     };
 
     model.subscribe(container.render, property);
-
     return container;
 
     function show404() {
