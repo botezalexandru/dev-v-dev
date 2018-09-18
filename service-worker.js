@@ -1,4 +1,4 @@
-const VERSION = 6;
+const VERSION = 1;
 const CACHE_NAME = `dev-v-dev-cache-${VERSION}`;
 const RESOURCES_MANIFEST = 'resources-manifest.json';
 
@@ -7,11 +7,7 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME).then(cache => {
             return fetch(RESOURCES_MANIFEST)
                 .then(resp => resp.json())
-                .then(fileArr => {
-                    fileArr.forEach(filename => {
-                        fetch(filename).then(resp => cache.put(filename, resp));
-                    })
-                })
+                .then(fileArr => cache.addAll(fileArr))
         })
     );
 });
@@ -29,13 +25,13 @@ self.addEventListener('activate', function onActivate(event) {
 });
 
 self.addEventListener('fetch', event => {
-    // if (event.request.url.indexOf(location.origin) === 0) {
-    //     const duplicatedRequest = event.request.clone();
+    if (event.request.url.indexOf(location.origin) === 0) {
+        const duplicatedRequest = event.request.clone();
 
-    //     event.respondWith(caches.match(event.request).then(resp => {
-    //         return resp || fetch(duplicatedRequest);
-    //     }));
-    // }
+        event.respondWith(caches.match(event.request).then(resp => {
+            return resp || fetch(duplicatedRequest);
+        }));
+    }
 });
 
 self.addEventListener('push', event => {

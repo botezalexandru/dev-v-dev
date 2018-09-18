@@ -1,6 +1,7 @@
 [
     "/",
     "src/bundle.js",
+    "src/app-config.js",
     "src/styles/style.css",
     "src/styles/forms.css",
     "src/styles/user-stats.css"
