@@ -78,25 +78,31 @@ function setupPWA() {
             notificationEl.addEventListener("click", () => {
                 Notification.requestPermission().then(permission => {
                     if (permission === 'granted') {
-                        messaging.getToken().then(token => {
-                            console.log(token);
-
-                            firebase
-                                .database()
-                                .ref(`tokens/${token}`)
-                                .set(true);
-
-                            notificationEl.remove();
-                        }, err => {
-                            console.log(err);
-                        });
+                        sendTokenToServer(messaging);
                     } else if (permission === "denied") {
                         notificationEl.remove();
                     }
 
                 });
             })
+        } else {
+            sendTokenToServer(messaging);
         }
 
+    }
+
+    function sendTokenToServer(messaging) {
+        messaging.getToken().then(token => {
+            console.log(token);
+
+            firebase
+                .database()
+                .ref(`tokens/${token}`)
+                .set(true);
+
+            notificationEl.remove();
+        }, err => {
+            console.log(err);
+        });
     }
 }
