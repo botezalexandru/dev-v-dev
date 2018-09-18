@@ -29,23 +29,38 @@ self.addEventListener('activate', function onActivate(event) {
 });
 
 self.addEventListener('fetch', event => {
-    if (event.request.url.indexOf(location.origin) === 0) {
-        const duplicatedRequest = event.request.clone();
+    // if (event.request.url.indexOf(location.origin) === 0) {
+    //     const duplicatedRequest = event.request.clone();
 
-        event.respondWith(caches.match(event.request).then(resp => {
-            return resp || fetch(duplicatedRequest);
-        }));
-    }
+    //     event.respondWith(caches.match(event.request).then(resp => {
+    //         return resp || fetch(duplicatedRequest);
+    //     }));
+    // }
+});
+
+self.addEventListener('push', event => {
+    event.waitUntil(
+        displayNotification(event.data.json())
+    );
 });
 
 function displayNotification(payload, tag = 'common-tag') {
     const title = 'Dev v Dev';
+    const {
+        data
+    } = payload;
 
+    let resultText = "wins over";
+
+    if (data.result === 'dev2') {
+        resultText = "loses to";
+    } else if (data.result === 'draw') {
+        resultText = "draws"
+    }
 
     return self.registration.showNotification(title, {
         icon: 'src/icons/icon-512x512.png',
-        body: `${payload.data.text}
-${payload.data.author} | ${self.getDateString(new Date(Number(payload.data.timestamp)))}`,
+        body: `${data.dev1} ${resultText} ${data.dev2}`,
         tag,
         vibrate: [100, 50, 100, 50, 100, 50],
         requireInteraction: false

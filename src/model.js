@@ -45,12 +45,17 @@ const Model = (function modelIIFE() {
                 data.result = 'dev2';
             }
 
-            data.past.unshift({
+            const newFightData = {
                 dev1: data.dev1.username,
                 dev2: data.dev2.username,
                 result: data.result
-            });
+            }
+            data.past.unshift(newFightData);
             localforage.setItem('results', JSON.stringify(data.past));
+            firebase
+                .database()
+                .ref(`fights`)
+                .push(newFightData);
 
             notifySubscribers();
         },
