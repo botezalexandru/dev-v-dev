@@ -48,7 +48,7 @@ document.addEventListener("submit", function (e) {
         resultsEl.classList.add("hidden");
         mainEl.appendChild(previousResults);
     }
-}); 
+}()); 
 
 
 

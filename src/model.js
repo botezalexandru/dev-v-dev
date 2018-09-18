@@ -52,10 +52,15 @@ const Model = (function modelIIFE() {
             }
             data.past.unshift(newFightData);
             localforage.setItem('results', JSON.stringify(data.past));
-            firebase
-                .database()
-                .ref(`fights`)
-                .push(newFightData);
+
+            try {
+                firebase
+                    .database()
+                    .ref(`fights`)
+                    .push(newFightData);
+            } catch (e) {
+                console.log("Firebase has not been initialized yet");
+            }
 
             notifySubscribers();
         },
