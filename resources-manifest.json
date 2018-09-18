@@ -1,5 +1,5 @@
 [
-    "/",
+    ".",
     "src/bundle.js",
     "src/styles/style.css",
     "src/styles/forms.css",
